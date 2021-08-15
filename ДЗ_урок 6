@@ -1,0 +1,33 @@
+Задание 1
+
+SELECT COUNT(user_id) FROM (
+	SELECT user_id, (SELECT birthday 
+                     FROM profiles as P 
+					 WHERE P.user_id = L.user_id) as birthday
+	FROM likes as L
+    ORDER BY birthday DESC 
+    LIMIT 10
+) AS T;
+
+
+Задание 2
+
+SELECT COUNT(user_id) FROM (
+	SELECT user_id, (SELECT birthday 
+                     FROM profiles as P 
+					 WHERE P.user_id = L.user_id) as birthday
+	FROM likes as L
+    ORDER BY birthday DESC 
+    LIMIT 10
+) AS T;
+
+
+Задание 3
+
+SELECT 
+    CASE(gender)
+        WHEN 'm' THEN 'мужской'
+        WHEN 'f' THEN 'женский'
+        ELSE 'нет'
+    END as gender
+    , COUNT(*) as 'Кол-во:' FROM profiles GROUP BY gender;
