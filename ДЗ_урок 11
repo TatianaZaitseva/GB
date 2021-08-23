@@ -1,0 +1,64 @@
+“Оптимизация запросов”
+
+Задание 1
+
+CREATE TABLE logs (
+  table_name VARCHAR(20) NOT NULL,
+  pk_id INT UNSIGNED NOT NULL,
+  name VARCHAR(255),
+  created_at DATETIME DEFAULT NOW()
+) ENGINE=ARCHIVE;
+
+CREATE TRIGGER users_log AFTER INSERT ON users FOR EACH ROW
+  INSERT INTO logs 
+    SET 
+      table_name = 'users',
+      pk_id = NEW.id,
+      name = NEW.name;
+
+CREATE TRIGGER catalogs_log AFTER INSERT ON catalogs FOR EACH ROW
+  INSERT INTO logs 
+    SET 
+      table_name = 'catalogs',
+      pk_id = NEW.id,
+      name = NEW.name;
+
+CREATE TRIGGER products_log AFTER INSERT ON products FOR EACH ROW
+  INSERT INTO logs 
+    SET 
+      table_name = 'products',
+      pk_id = NEW.id,
+      name = NEW.name;
+      
+
+“NoSQL”
+      
+Задание 1
+
+SADD ip '127.0.0.1' '127.0.0.2' '127.0.0.3'
+// Невозможно добавить в коллекцию уже имеющиейся в ней ip адрес, только уникальные значения
+SADD ip '127.0.0.1' 
+// просмотрим список уникальных ip
+SMEMBERS ip
+// кол-во адресов в коллекции
+SCARD ip      
+
+
+Задание 2
+      
+set alex@mail.ru alex 
+set alex alex@mail.ru
+
+get alex@mail.ru 
+get alex 
+
+
+
+Задание 3
+
+shop.products.insert({
+    name: "Intel Core i3-8100",
+    description: "Процессор для настольных персональных компьютеров, основанных на платформе Intel.",
+    price: 7890.00,
+    catalog: "Процессоры"
+})
